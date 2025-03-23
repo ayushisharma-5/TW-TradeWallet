@@ -1,0 +1,29 @@
+[
+    {
+      "ticker": "AAPL",
+      "open_price": 100.00,
+      "close_price": 110.00,
+      "date": "2025-03-03"
+    },
+    {
+      "ticker": "AAPL",
+      "open_price": 100.00,
+      "close_price": 110.00,
+      "date": "2025-03-03"
+    },
+    {
+      "ticker": "AAPL",
+      "open_price": 100.00,
+      "close_price": 110.00,
+      "date": "2025-03-03"
+    },
+    {
+      "dates": [
+        {
+          "year": "2025",
+          "month": "03",
+          "day": "03"
+        }
+      ]
+    }
+  ]  
