@@ -1,50 +1,76 @@
-  .signin-body {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-  }
+.signin-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  font-family: Arial, sans-serif;
+}
 
-  .signin-container {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    margin-top: 20vh;
-    text-align: center;
-  }
-  
-  .signin-container h1 {
-    margin-bottom: 20px;
-  }
-  
-  .signin-container label {
-    display: block;
-    text-align: left;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  .signin-container input[type='text'],
-  .signin-container input[type='password'] {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 15px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-  }
-  
-  .signin-container input[type='submit'] {
-    background-color: #007bff;
-    color: white;
-    padding: 10px;
-    width: 100%;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .signin-container input[type='submit']:hover {
-    background-color: #0056b3;
-  }  
+.signin-container {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+}
+
+.signin-container h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.signin-container label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+.signin-container input[type="text"],
+.signin-container input[type="password"] {
+  width: 100%;
+  padding: 0.75rem;
+  margin: 0.5rem 0 1rem 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.signin-container input[type="submit"] {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #6a11cb;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
+
+.signin-container input[type="submit"]:hover {
+  background-color: #2575fc;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.remember-me input {
+  margin-right: 0.5rem;
+}
+
+.forgot-password {
+  text-align: center;
+  margin-top: 1rem;
+  color: #6a11cb;
+  cursor: pointer;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
