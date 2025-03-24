@@ -1,5 +1,5 @@
 import '../../styles/author.css'
-import userpic from '../../assets/Trade-Wallet-Logo.png'
+import userpic from '../../assets/Trade-Wallet-Logo.jpeg'
 
 const Author = ({img, bio }) => {
     return (<>

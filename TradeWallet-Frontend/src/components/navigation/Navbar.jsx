@@ -1,5 +1,5 @@
 import '../../styles/Navbar.css';
-import logo from '../../assets/kiwi-logo.png';
+import logo from '../../assets/kiwi-logo.jpg';
 import { Link } from 'react-router-dom';
 
 const Navbar = ({ handleLogout }) => {
