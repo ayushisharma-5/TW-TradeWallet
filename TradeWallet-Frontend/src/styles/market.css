@@ -1,37 +1,63 @@
 .market-container {
-    padding: 20px;
-  }
-  
-  .market-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-  }
-  
-  .market-table th,
-  .market-table td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: left;
-  }
-  
-  .market-table th {
-    background-color: #f4f4f4;
-  }
-  
-  .market-actions {
-    display: flex;
-    gap: 10px;
-  }
-  
-  .market-actions button {
-    padding: 10px 20px;
-    background-color:#007bff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .market-actions button:hover {
-    background-color: #0056b3;
-  }  
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5; /* Matches the website's background */
+}
+
+.market-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  background-color: white; /* Table background */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for the table */
+  border-radius: 8px; /* Rounded corners */
+  overflow: hidden; /* Ensures rounded corners apply to the table */
+}
+
+.market-table th,
+.market-table td {
+  border: 1px solid #ddd; /* Updated border color */
+  padding: 10px;
+  text-align: left;
+}
+
+.market-table th {
+  background-color: #6a11cb; /* Matches the website's primary color */
+  color: white;
+  font-weight: bold; /* Bold text for headers */
+  text-transform: uppercase; /* Consistent header styling */
+}
+
+.market-table tr:nth-child(even) {
+  background-color: #f9f9f9; /* Alternating row color */
+}
+
+.market-table tr:nth-child(odd) {
+  background-color: #ffffff; /* Alternating row color */
+}
+
+.market-table tr:hover {
+  background-color: #e0e7ff; /* Light blue hover effect */
+  cursor: pointer;
+}
+
+.market-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.market-actions button {
+  padding: 10px 20px;
+  background-color: #6a11cb; /* Matches the website's primary button color */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.market-actions button:hover {
+  background-color: #2575fc; /* Slightly darker hover effect */
+} 
