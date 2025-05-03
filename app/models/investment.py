@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer,Float,Date
+from sqlalchemy import Column, String, Integer, Float, Date
 from app.db import Base
 
 class Investment(Base):
@@ -11,6 +11,10 @@ class Investment(Base):
     quantity = Column(Integer)
     date = Column(Date)
 
-
     def __str__(self):
-        return f'[id: {self.id}, portfolioId: {self.portfolio_id},ticker: {self.ticker},price: {self.price}]'
+        return (f"[id: {self.id}, portfolioId: {self.portfolio_id}, "
+                f"ticker: {self.ticker}, price: {self.price}, "
+                f"quantity: {self.quantity}, date: {self.date}]")
+
+    def __repr__(self):
+        return self.__str__()

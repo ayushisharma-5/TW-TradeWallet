@@ -32,6 +32,17 @@ def get_balance(userId):
         return 0
     return users[0].balance
 
+def delete_user_by_id(userId):
+    userId = int(userId)
+    with get_session() as session:
+        users = session.query(User).filter(User.id == userId).all()
+        if len(users) == 0:
+            return None
+        user = users[0]
+        session.delete(user)
+        session.commit()
+
+
 def update_balance(userId,balance):
     with get_session() as session:
         users = session.query(User).filter(User.id == userId).all()
