@@ -21,6 +21,23 @@ def get_all():
     session = get_session()
     return session.query(User).all()
 
-def get_sctive():
+def get_active():
     session = get_session()
     return session.query(User).filter(User.is_active == True).all()
+
+def get_balance(userId):
+    session = get_session()
+    users = session.query(User).filter(User.id == userId).all()
+    if len(users) == 0:
+        return 0
+    return users[0].balance
+
+def update_balance(userId,balance):
+    with get_session() as session:
+        users = session.query(User).filter(User.id == userId).all()
+        if len(users) == 0:
+            return None
+        user = users[0]
+        user.balance = balance
+        session.commit()
+

@@ -8,3 +8,6 @@ class Portfolio(Base):
     name = Column(String, nullable=False)
     strategy = Column(String, nullable=False)
     userID = Column(Integer, nullable=False)
+
+    def __str__(self):
+        return f'[id: {self.id}, name: {self.name},startegy: {self.strategy}]'
