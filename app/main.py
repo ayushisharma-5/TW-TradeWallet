@@ -1,21 +1,21 @@
-from flask import Flask, Response
-import json
-from app.models.user import User
+from flask import Flask
+from app.config import Config
+from app.extensions import db
+from app.routes.user_routes import user_bp  # ✅ Import your blueprint
 
-app = Flask(__name__)
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object(Config)
 
-@app.route("/users/get-all")
-def get_all():
-    users = [
-        User(id=1, username='John Doe', balance=1000),
-        User(id=2, username='Jane Doe', balance=1200),
-        User(id=3, username='James Doe', balance=1500)
-    ]
-    user_dicts = [{
-        "id": user.id,
-        "username": user.username,
-        "balance": user.balance
-    } for user in users]
+    db.init_app(app)
+    app.register_blueprint(user_bp, url_prefix='/users')  # ✅ Register it
 
-    pretty_json = json.dumps(user_dicts, indent=4)
-    return Response(pretty_json, mimetype='application/json')
+    with app.app_context():
+        db.create_all()
+
+    return app
+
+
+if __name__ == '__main__':
+    app = create_app()
+    app.run(debug=True)
