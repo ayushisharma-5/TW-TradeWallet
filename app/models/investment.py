@@ -1,14 +1,14 @@
 from app.extensions import db
 
 class Investment(db.Model):
-    __tablename__ = 'investments'
+    __tablename__ = 'investments' # table name
 
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    portfolio_id = db.Column(db.Integer, nullable=False) #a
-    ticker = db.Column(db.String(20), nullable=False)
-    price = db.Column(db.Float)
-    quantity = db.Column(db.Integer)
-    date = db.Column(db.Date)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True) # unique id
+    portfolio_id = db.Column(db.Integer, nullable=False) # identifies the portfolio 1
+    ticker = db.Column(db.String(20), nullable=False) # stock ticker symbol x
+    price = db.Column(db.Float) # purchase price
+    quantity = db.Column(db.Integer) # number of shares b
+    date = db.Column(db.Date) # purchase date
 
     def __str__(self):
         return (f"[id: {self.id}, portfolioId: {self.portfolio_id}, "
@@ -16,4 +16,4 @@ class Investment(db.Model):
                 f"quantity: {self.quantity}, date: {self.date}]")
 
     def __repr__(self):
-        return self.__str__()
+        return self.__str__() # representation is same as string
