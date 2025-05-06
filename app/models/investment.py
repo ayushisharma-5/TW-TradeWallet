@@ -4,7 +4,7 @@ class Investment(db.Model):
     __tablename__ = 'investments'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    portfolio_id = db.Column(db.Integer, nullable=False)
+    portfolio_id = db.Column(db.Integer, nullable=False) #a
     ticker = db.Column(db.String(20), nullable=False)
     price = db.Column(db.Float)
     quantity = db.Column(db.Integer)
