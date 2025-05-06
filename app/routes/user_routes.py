@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from app.services.user_dao import get_all, create_user
 from app.models.exceptions.QueryException import QueryException
 
@@ -14,13 +14,10 @@ def get_all_users():
     except Exception as e:
         return jsonify({"error": f"Unexpected error: {str(e)}"}), 500
 
-
 @user_bp.route("/add-user", methods=["POST"])
 def add_user():
-    from flask import request
     try:
         data = request.get_json()
-
         username = data.get("username")
         password = data.get("password")
         balance_input = data.get("balance")
@@ -37,7 +34,10 @@ def add_user():
         return jsonify({"message": "User created successfully"}), 201
 
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         return jsonify({"error": f"Internal Server Error: {str(e)}"}), 500
+
 
   
 #@user_bp.route("/create", methods=["POST"])  

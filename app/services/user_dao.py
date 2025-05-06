@@ -12,7 +12,7 @@ def create_user(username: str, password: str, balance: float) -> None:
         if not username or not password:
             raise ValueError('Username and password are required.')
 
-        user = User(username=username, pwd=password, balance=balance)
+        user = User(username=username, password=password, balance=balance)
         db.session.add(user)
         db.session.commit()
     except Exception as e:
