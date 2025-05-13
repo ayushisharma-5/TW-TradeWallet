@@ -17,3 +17,13 @@ class Investment(db.Model):
 
     def __repr__(self):
         return self.__str__() # representation is same as string
+    
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "portfolio_id": self.portfolio_id,
+            "ticker": self.ticker,
+            "price": self.price,
+            "quantity": self.quantity,
+            "date": self.date.isoformat() if self.date else None
+    }

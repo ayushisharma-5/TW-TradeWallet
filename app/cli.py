@@ -180,3 +180,6 @@ def run():
             break
         else:
             print(colored("Invalid input. Try again.", "red"))
+
+if __name__ == '__main__':
+     run()

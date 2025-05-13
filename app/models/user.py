@@ -19,6 +19,7 @@ class User(db.Model):
         """Returns a dictionary representation of the user.""" # Added Docstring
         return {
             "id": self.id,
+            "isActive": self.is_active,
             "username": self.username,
             "balance": self.balance
         }

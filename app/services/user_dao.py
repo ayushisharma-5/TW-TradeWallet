@@ -1,16 +1,18 @@
 from app.extensions import db
 from app.models.user import User
 from typing import List
-from sqlalchemy.orm.exc import MultipleResultsFound, NoResultFound
 from app.models.exceptions.QueryException import QueryException
+from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
 
 
 def create_user(username: str, password: str, balance: float) -> None:
     try:
+        if not isinstance(username, str) or not username.strip():
+            raise ValueError('Username must be a non-empty string.')
+        if not isinstance(password, str) or not password.strip():
+            raise ValueError('Password must be a non-empty string.')
         if not isinstance(balance, float):
-            raise ValueError(f'Balance must be a decimal, found {balance}')
-        if not username or not password:
-            raise ValueError('Username and password are required.')
+            raise ValueError(f'Balance must be a float, received {balance}.')
 
         user = User(username=username, password=password, balance=balance)
         db.session.add(user)
@@ -22,8 +24,14 @@ def create_user(username: str, password: str, balance: float) -> None:
 
 def password_matches(username: str, password: str) -> bool:
     try:
+        if not isinstance(username, str) or not isinstance(password, str):
+            raise ValueError('Both username and password must be strings.')
+
         user = User.query.filter_by(username=username).one()
-        return password == user.pwd
+        if password == user.password:
+            return user
+        else:
+            raise Exception("Username and password do not match")
     except NoResultFound:
         raise Exception(f'No user found with username: {username}')
     except MultipleResultsFound:
@@ -49,7 +57,7 @@ def get_active() -> List[User]:
 def get_balance(user_id: int) -> float:
     try:
         if not isinstance(user_id, int):
-            raise ValueError('user_id must be an integer')
+            raise ValueError('user_id must be an integer.')
 
         user = User.query.filter_by(id=user_id).first()
         return user.balance if user else 0.0
@@ -59,6 +67,9 @@ def get_balance(user_id: int) -> float:
 
 def delete_user_by_id(user_id: int) -> bool:
     try:
+        if not isinstance(user_id, int):
+            raise ValueError('user_id must be an integer.')
+
         user = User.query.filter_by(id=user_id).first()
         if not user:
             return False
@@ -72,6 +83,11 @@ def delete_user_by_id(user_id: int) -> bool:
 
 def update_balance(user_id: int, balance: float) -> bool:
     try:
+        if not isinstance(user_id, int):
+            raise ValueError('user_id must be an integer.')
+        if not isinstance(balance, float):
+            raise ValueError('balance must be a float.')
+
         user = User.query.filter_by(id=user_id).first()
         if not user:
             return False

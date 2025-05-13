@@ -2,6 +2,8 @@ from app.extensions import db
 from app.models.portfolio import Portfolio
 from app.models.exceptions.QueryException import QueryException # Import custom exception
 from typing import List
+from sqlalchemy.orm.exc import NoResultFound, MultipleResultsFound
+
 
 
 # --- Portfolio Service Functions --- #
@@ -22,6 +24,8 @@ def create_portfolio(name: str, strategy: str, user_id: int) -> None:
 def get_portfolios_by_user(user_id: int) -> List[Portfolio]:
     """Retrieves all portfolios belonging to a specific user.""" # Added docstring
     try:
+        if not isinstance(user_id,int):
+            raise Exception(f'User ID must be an integer received: {user_id}')
         # Query portfolios filtered by user ID
         return Portfolio.query.filter_by(user_id=user_id).all()
     except Exception as e:
@@ -33,8 +37,14 @@ def get_portfolios_by_id(portfolio_id: int) -> List[Portfolio]:
     """Retrieves portfolios by their specific ID.""" # Added docstring
     # Note: This assumes 'id' is unique, but returns List as per original signature
     try:
+        if not isinstance(portfolio_id,int):
+            raise Exception(f'User ID must be an integer received: {portfolio_id}')
         # Query portfolios filtered by portfolio ID
         return Portfolio.query.filter_by(id=portfolio_id).all()
+    except NoResultFound:
+        raise Exception(f'No Portfolio exists with the Id: {portfolio_id}')
+    except MultipleResultsFound:
+        raise Exception(f'Found multiple portfolios with the same ID')
     except Exception as e:
         # Handle database query errors
-        raise QueryException(f"Failed to retrieve portfolio by id={portfolio_id}", e)
+        raise QueryException(f'Failed to retrieve portfolio by id={portfolio_id}: {str(e)}')
