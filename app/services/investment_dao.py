@@ -67,13 +67,13 @@ def purchase(portfolio_id: int, ticker: str, price: float, quantity: int, purcha
         if not isinstance(purchase_date, date):
             raise ValueError("purchase_date must be a valid date")
 
-        portfolio = get_portfolios_by_id(portfolio_id)
-        if not portfolio:
+        portfolios = get_portfolios_by_id(portfolio_id)
+        if not portfolios:
             raise Exception(f"No portfolio found with ID {portfolio_id}")
-
+        portfolio = portfolios[0]  # Take the first portfolio from the list
         user_id = portfolio.user_id
         balance = get_balance(user_id)
-        total_cost = price * quantity
+        total_cost: float = price * quantity
 
         if balance < total_cost:
             raise Exception("Insufficient funds")
@@ -83,7 +83,7 @@ def purchase(portfolio_id: int, ticker: str, price: float, quantity: int, purcha
             ticker=ticker,
             price=price,
             quantity=quantity,
-            date=purchase_date
+            date=date.today()
         )
 
         db.session.add(investment)

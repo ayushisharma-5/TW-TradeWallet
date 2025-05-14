@@ -22,20 +22,17 @@ def create_user(username: str, password: str, balance: float) -> None:
         raise QueryException('Failed to create a new user', e)
 
 
-def password_matches(username: str, password: str) -> bool:
-    try:
-        if not isinstance(username, str) or not isinstance(password, str):
-            raise ValueError('Both username and password must be strings.')
-
+def password_matches(username: str, password: str) -> User:
+    try: 
         user = User.query.filter_by(username=username).one()
         if password == user.password:
             return user
         else:
-            raise Exception("Username and password do not match")
+            raise Exception('Username and password do not match')
     except NoResultFound:
         raise Exception(f'No user found with username: {username}')
     except MultipleResultsFound:
-        raise Exception(f'Multiple users found with username: {username}')
+        raise Exception(f'Unexpected state - found multiple users with same username {username}')
     except Exception as e:
         raise QueryException('Failed while checking username & password', e)
 

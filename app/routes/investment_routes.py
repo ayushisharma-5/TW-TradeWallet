@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request
-from app.services.investment_dao import get_investment_by_portfolio, sell
+from app.services.investment_dao import get_investment_by_portfolio, sell, purchase
+from datetime import date
 
 investment_bp = Blueprint('investment', __name__)
 
@@ -28,3 +29,28 @@ def sell_investment():
         return jsonify({"message": "Investment sold successfully"}), 200
     except Exception as e:
         return jsonify({"message": f"Failed to sell investment: {str(e)}"}), 500
+
+@investment_bp.route('/purchase', methods=['POST'])
+def purchase_investment():
+    try:
+        data = request.get_json()
+
+        portfolio_id = data.get('portfolio_id')
+        ticker = data.get('ticker')
+        price = data.get('price')
+        quantity = data.get('quantity')
+
+        # Validate required fields
+        if not all([portfolio_id, ticker, price, quantity]):
+            return jsonify({"error": "portfolio_id, ticker, price, and quantity are required"}), 400
+
+        result = purchase(
+            int(portfolio_id),
+            ticker,
+            float(price),
+            int(quantity),
+            date.today()
+        )
+        return jsonify({"message": result}), 201
+    except Exception as e:
+        return jsonify({"error": f"Failed to complete purchase: {str(e)}"}), 500

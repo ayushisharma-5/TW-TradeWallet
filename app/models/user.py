@@ -8,7 +8,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True) # Adjusted spacing
     username = db.Column(db.String(50), nullable=False)
     password = db.Column(db.String(100), nullable=False) # Added space
-    is_active = db.Column(db.Boolean, default=True)
+    is_active = db.Column(db.Boolean, default=True, nullable=False)
     balance = db.Column(db.Float, nullable=False)
 
     def __str__(self):
