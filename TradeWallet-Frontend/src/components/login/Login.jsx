@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 import '../../styles/login.css';
 
 const Login = ({ setUserInParentComponent }) => {
@@ -7,27 +8,45 @@ const Login = ({ setUserInParentComponent }) => {
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
-    const signIn = (event) => {
+    const navigate = useNavigate();
+
+    const signIn = async (event) => {
         event.preventDefault();
+
         if (!username || !password) {
             toast.error('Please fill in all fields', { position: "top-right" });
             return;
         }
 
         setIsLoading(true);
-        // Simulate an API call
-        setTimeout(() => {
-            if (username === 'admin' && password === 'admin') {
-                setUserInParentComponent(prevState => ({
-                    ...prevState,
-                    user: username,
-                    isLoggedIn: true
+        const url = `http://127.0.0.1:5000/user/authenticate-user/${username}/${password}`;
+
+        try {
+            const res = await fetch(url);
+
+            if (!res.ok) {
+                setUserInParentComponent(prev => ({
+                    ...prev,
+                    isLoggedIn: false,
                 }));
+                toast.error('Login failed! Please check your credentials.', {
+                    autoClose: false,
+                });
             } else {
-                toast.error('Invalid username or password', { position: "top-right" });
+                const data = await res.json();
+                setUserInParentComponent(prev => ({
+                    ...prev,
+                    user: data.username,
+                    userId: data.id,
+                    isLoggedIn: true,
+                }));
+                navigate('/home');
             }
+        } catch (error) {
+            toast.error(`Failed to authenticate user ${username}: ${error}`, { autoClose: false });
+        } finally {
             setIsLoading(false);
-        }, 1000);
+        }
     };
 
     return (
@@ -41,7 +60,7 @@ const Login = ({ setUserInParentComponent }) => {
                             type="text"
                             id="Email"
                             name="Email"
-                            onChange={(event) => setUsername(event.target.value)}
+                            onChange={(e) => setUsername(e.target.value)}
                             required
                         />
                         <label htmlFor="Password">Password</label>
@@ -49,7 +68,7 @@ const Login = ({ setUserInParentComponent }) => {
                             type="password"
                             id="Password"
                             name="Password"
-                            onChange={(event) => setPassword(event.target.value)}
+                            onChange={(e) => setPassword(e.target.value)}
                             required
                         />
                         <div className="remember-me">
