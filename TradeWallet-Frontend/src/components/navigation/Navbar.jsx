@@ -8,10 +8,11 @@ const Navbar = ({ handleLogout }) => {
         <>
             <nav className="navbar">
                 <div className="navbar-left">
-                    <img src={logo} alt="App Logo" className="navbar-logo" />
+                    <span style={{ fontSize: '1.5rem', marginRight: '0.5rem' }}>💰</span>
                     <span className="navbar-brand">TradeWallet</span>
                 </div>
                 <div className="navbar-center">
+                    <Link to="/home" className="navbar-link">Home</Link>
                     <Link to="/portfolio" className="navbar-link">Portfolio</Link>
                     <Link to="/market" className="navbar-link">Market</Link>
                     <Link to="/about" className="navbar-link">About</Link>
