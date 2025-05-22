@@ -8,7 +8,7 @@ const Navbar = ({ handleLogout }) => {
         <>
             <nav className="navbar">
                 <div className="navbar-left">
-                    <span style={{ fontSize: '1.5rem', marginRight: '0.5rem' }}>💰</span>
+                    <img src={logo} alt="TradeWallet Logo" className="navbar-logo" style={{ width: '30px', height: '30px', marginRight: '0.5rem' }} />
                     <span className="navbar-brand">TradeWallet</span>
                 </div>
                 <div className="navbar-center">
